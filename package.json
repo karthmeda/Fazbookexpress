@@ -1,9 +1,12 @@
 {
   "name": "fazbook",
   "version": "0.0.0",
+  "engines": {
+    "node": "7.1.0"
+  },
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
