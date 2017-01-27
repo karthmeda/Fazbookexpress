@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
+//Posts data from input form to database
 router.post('/', function(req, res, next) {
   models.User.create({
     firstName: req.body.firstName,
@@ -32,11 +33,39 @@ router.post('/', function(req, res, next) {
   });
 });
 
+//route to specify what happens on press of delete submit button
 router.delete('/:id', function(req, res, next) {
   models.User.destroy({
     where: { id: req.params.id }
   }).then(function(user) {
     res.redirect('/users');
+  });
+});
+
+
+//routes user to entire user profile info on click of View User page link on main page
+router.get('/show/:id', function(req, res, next) {
+  models.User.findById(req.params.id).then(function(user) {
+    res.render('users/show', { user: user, title: user.firstName });
+  });
+});
+
+//routes to edit view with input fields prepopulated with previously inputted information
+router.get('/:id/edit', function(req, res, next) {
+  models.User.findById(req.params.id).then(function(user) {
+    res.render('users/edit', { user: user });
+  });
+});
+
+//this function handles what happens on submit of editing users information
+router.put('/:id', function(req, res, next) {
+  models.User.update({
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    dob: req.body.dob
+  }, { where: { id: req.params.id } }).then(function() {
+    res.redirect('/users/');
   });
 });
 
