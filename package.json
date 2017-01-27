@@ -1,8 +1,6 @@
 {
   "name": "fazbook",
   "version": "0.0.0",
-  "engines": {
-    "node": "7.1.0"
   },
   "private": true,
   "scripts": {
